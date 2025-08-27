@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "@fastify/cors": "^11.0.1",
+    "@fastify/formbody": "^8.0.2",
+    "@fastify/jwt": "^9.1.0",
+    "@fastify/multipart": "^9.0.3",
+    "@fastify/static": "^8.2.0",
+    "@prisma/client": "^6.13.0",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.1",
+    "fastify": "^5.4.0",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^6.13.0"
+  },
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  }
+}

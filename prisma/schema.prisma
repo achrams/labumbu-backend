@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Article {
+  id                  Int       @id @default(autoincrement())
+  title               String
+  contents            String[]
+  image               String
+  optImg              String?
+  specialities        String[]
+  approvedBy          String?
+  recommendedRecipes  Recipe[]  @relation("ArticleRecipe")
+  recommendedProducts Product[] @relation("ArticleProduct")
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+}
+
+model Recipe {
+  id                  Int              @id @default(autoincrement())
+  title               String
+  description         String
+  image               String
+  video               String?
+  ingredients         String[]
+  utensils            String[]
+  instructions        String
+  categoryId          Int // foreign key
+  category            Category         @relation(fields: [categoryId], references: [id])
+  articles            Article[]        @relation("ArticleRecipe")
+  recommendations     Recommendation[] @relation("RecipeRecommendation")
+  recommendedProducts Product[]        @relation("RecipeProduct")
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+}
+
+model Product {
+  id                  Int       @id @default(autoincrement())
+  name                String
+  image               String
+  shop_url            String
+  articles            Article[] @relation("ArticleProduct")
+  recommendedProducts Recipe[]  @relation("RecipeProduct")
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+}
+
+model Recommendation {
+  id        Int      @id @default(autoincrement())
+  recipes   Recipe[] @relation("RecipeRecommendation")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id      Int      @id @default(autoincrement())
+  name    String
+  image   String
+  recipes Recipe[]
+}
