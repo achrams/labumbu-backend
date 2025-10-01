@@ -10,9 +10,11 @@ datasource db {
 model Article {
   id                  Int       @id @default(autoincrement())
   title               String
+  slug                String
   contents            String[]
   image               String
   optImg              String?
+  video               String
   specialities        String[]
   approvedBy          String?
   recommendedRecipes  Recipe[]  @relation("ArticleRecipe")

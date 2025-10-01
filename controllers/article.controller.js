@@ -57,6 +57,7 @@ export const createArticle = async (req, reply) => {
 
   const created = await ArticleService.create({
     title: fields.title,
+    slug: fields.title.split(" ").join("-"),
     image: imagePath,
     optImg: optImgPath,
     approvedBy: fields.approvedBy,
@@ -122,6 +123,7 @@ export const updateArticle = async (req, reply) => {
 
   const updateData = {
     title: fields.title,
+    slug: fields.title.split(" ").join("-"),
     approvedBy: fields.approvedBy,
     contents: JSON.parse(fields.contents || "[]"),
     specialities: JSON.parse(fields.specialities || "[]"),

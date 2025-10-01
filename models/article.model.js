@@ -12,6 +12,15 @@ export const ArticleModel = {
       },
     }),
 
+  findBySlug: (slug) =>
+    prisma.article.findUnique({
+      where: { slug: slug },
+      include: {
+        recommendedRecipes: true,
+        recommendedProducts: true,
+      },
+    }),
+
   create: (data) => prisma.article.create({ data }),
 
   update: (id, data) =>
